@@ -84,7 +84,8 @@ vpool_resize(struct vpool *pool, size_t datsize)
 		if (ret == NULL)
 			return (ENOMEM);
 
-		memcpy(ret, pool->v_buf, pool->v_off);
+		if (pool->v_buf != NULL)
+			memcpy(ret, pool->v_buf, pool->v_off);
 		free(pool->v_basebuf);
 		pool->v_basebuf = pool->v_buf = ret;
 		pool->v_size = size;
